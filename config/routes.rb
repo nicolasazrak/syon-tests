@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :tests, only: [:index, :create, :new, :show] do
+  resources :tests, only: [:index, :create, :new, :show, :edit, :update] do
     resources :submissions, only: [:index, :show, :new, :create]
     resources :questions, only: [:new, :create]
   end

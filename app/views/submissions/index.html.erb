@@ -13,6 +13,9 @@
 
 <br>
 
+
+<%= link_to "Volver", tests_path, class: 'btn btn-primary' %>
+
 <%= link_to "Crear nueva entrega", new_test_submission_path, class: 'btn btn-success' %>
 
 <%= link_to "Agregar pregunta", new_test_question_path(@test), class: 'btn btn-default' %>
@@ -36,7 +39,7 @@
 				<td><%= submission.id %></td>
 				<td><%= submission.applicant.name %></td>
 				<td><%= submission.applicant.email %></td>
-				<td class="text-center"><%= link_to 'Ver', test_submission_path(@test, submission.token) %></td>
+				<td class="text-center"><%= link_to 'Ver', test_submission_path(@test, submission.token), class: 'btn btn-default' %></td>
 			</tr>
 		<% end %>
 	</tbody>

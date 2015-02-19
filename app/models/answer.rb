@@ -4,4 +4,15 @@ class Answer < ActiveRecord::Base
 	belongs_to :submission
 
 
+	def expired?
+		#TODO
+		false
+	end
+
+	def completed?
+		#TODO
+		false
+	end
+
+
 end

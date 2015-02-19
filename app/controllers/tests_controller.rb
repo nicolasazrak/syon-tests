@@ -12,6 +12,13 @@ class TestsController < ApplicationController
 		@test = Test.find(params[:id])
 	end
 
+	def update
+		redirect_to tests_path
+	end
+
+	def edit
+		@test = Test.find(params[:id])
+	end
 
 	def create
 		@test = Test.new(test_params)
@@ -24,6 +31,7 @@ class TestsController < ApplicationController
 	def test_params
 		params.require(:test).permit(:description)
 	end
+
 
 
 end
