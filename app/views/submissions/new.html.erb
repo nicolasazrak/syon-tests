@@ -1,0 +1,34 @@
+<h1 class="text-center">Crear un nuevo submission para la persona: </h1>
+
+<br><br>
+
+<div class="col-md-4 col-md-offset-4">
+
+	<%= form_for [@test, @submission] do |f| %>
+
+		<%= fields_for :applicant do |f_applicant| %>
+		
+			<p>
+				<%= f_applicant.label :name, 'Nombre' %>
+				<%= f_applicant.text_field :name, class: 'form-control' %>
+			</p>
+			
+			<br>
+
+			<p>
+				<%= f_applicant.label :email %>
+				<%= f_applicant.text_field :email, class: 'form-control' %>
+			</p>
+
+		<% end %>
+		
+		<br><br>
+
+		<p class="text-center">
+			<%= link_to 'Volver', test_submissions_path(@test), class: 'btn btn-primary'  %>
+			<%= f.submit "Generar link!", class: 'btn btn-success' %>
+		</p>
+
+	<% end %>
+
+</div>

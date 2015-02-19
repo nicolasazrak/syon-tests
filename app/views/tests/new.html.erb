@@ -1,0 +1,23 @@
+<h1 class="text-center">Creando un test</h1>
+
+<br>
+
+<div class="col-md-4 col-md-offset-4">
+
+	<%= form_for @test do |f| %>
+
+		<p>
+			<%= f.label :description, 'Descripción' %><br>
+			<%= f.text_field :description, class: 'form-control' %>
+		</p>
+
+		<br />
+
+		<p class="text-center">
+			<%= link_to 'Volver', tests_path, class: 'btn btn-primary'  %>
+			<%= f.submit 'Guardar test', class: 'btn btn-success' %>
+		</p>
+
+	<% end %>
+
+</div>

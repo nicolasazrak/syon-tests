@@ -1,0 +1,22 @@
+<h1 class="text-center">Nueva pregunta</h1>
+
+<br><br>
+
+<div class="col-sm-4 col-sm-offset-4">
+	
+	<%= form_for [@test, @question] do |question| %>
+
+		<%= question.label :title %>
+		<%= question.text_field :title, class: 'form-control' %>
+		<br><br>
+			
+		
+		<%= question.label :description %>
+		<%= question.text_field :description, class: 'form-control' %>
+		<br><br>
+
+		<%= question.submit 'Crear', class: 'btn btn-primary text-center' %>
+
+	<% end %>
+
+</div>

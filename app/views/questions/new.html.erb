@@ -1,0 +1,33 @@
+<h1 class="text-center">Nueva pregunta</h1>
+
+<br><br>
+
+<div class="col-sm-4 col-sm-offset-4">
+	
+	<%= form_for [@test, @question] do |question| %>
+
+		<%= question.label :title, 'Título' %>
+		<%= question.text_field :title, class: 'form-control' %>
+		<br><br>
+			
+		
+		<%= question.label :description, 'Descripción' %>
+		<%= question.text_field :description, class: 'form-control' %>
+		<br><br>
+
+		<%= question.label :attachment, 'Adjunto' %>
+		<%= question.file_field :attachment, class: 'form-control' %>
+		<br><br>
+	
+		<%= question.label :duration, 'Duración (en minutos)' %>
+		<%= question.number_field :duration, class: 'form-control' %>
+		<br><br>
+
+		<p class="text-center">
+			<%= link_to 'Volver', test_submissions_path(@test), class: 'btn btn-primary'  %>
+			<%= question.submit 'Guardar pregunta', class: 'btn btn-success' %>
+		</p>
+
+	<% end %>
+
+</div>

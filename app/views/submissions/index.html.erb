@@ -1,0 +1,44 @@
+<h1 class="text-center">Entregas de <%= @test.description %></h1>
+
+<% if flash[:last_token] %>
+	<br>
+	
+	<div class="alert alert-success text-center">Link generado 
+		<strong>
+			<a href="http://localhost:3000<%= test_submission_path(@test.id, flash[:last_token]) %>">http://localhost:3000<%= test_submission_path(@test.id, flash[:last_token]) %></a>
+		</strong>
+	</div>
+
+<% end %>
+
+<br>
+
+<%= link_to "Crear nueva entrega", new_test_submission_path, class: 'btn btn-success' %>
+
+<%= link_to "Agregar pregunta", new_test_question_path(@test), class: 'btn btn-default' %>
+
+
+
+<br /><br /><br />
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Nombre</th>
+			<th>Email</th>
+			<th class="text-center">Acción</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @submissions.each do |submission| %>
+			<tr>
+				<td><%= submission.id %></td>
+				<td><%= submission.applicant.name %></td>
+				<td><%= submission.applicant.email %></td>
+				<td class="text-center"><%= link_to 'Ver', test_submission_path(@test, submission.token) %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
