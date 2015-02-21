@@ -10,7 +10,7 @@ class Submission < ActiveRecord::Base
 	end
 
 	def get_answer_for_question question 
-		answers.find{ |a| a.question.id == question }
+		answers.find{ |a| a.question == question }
 	end
 
 end

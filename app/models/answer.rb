@@ -1,6 +1,6 @@
 class Answer < ActiveRecord::Base
 
-	has_one :question
+	belongs_to :question
 	belongs_to :submission
 
 
@@ -11,7 +11,7 @@ class Answer < ActiveRecord::Base
 
 	def completed?
 		#TODO
-		false
+		true
 	end
 
 

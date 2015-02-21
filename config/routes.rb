@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
 
   resources :tests, only: [:index, :create, :new, :show, :edit, :update] do
-    resources :submissions, only: [:index, :show, :new, :create]
+    
     resources :questions, only: [:new, :create]
+    
+    resources :submissions, only: [:index, :show, :new, :create] do
+      resources :answers, only: [:create]
+    end
+
   end
+
 
   get 'login' => 'logins#index'
   get 'logout' => 'logins#logout'
