@@ -6,12 +6,12 @@ class Answer < ActiveRecord::Base
 
 	def expired?
 		#TODO
-		false
+		true
 	end
 
 	def completed?
 		#TODO
-		true
+		false
 	end
 
 

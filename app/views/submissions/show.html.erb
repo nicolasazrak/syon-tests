@@ -42,21 +42,27 @@
 				
 				<% answer = @submission.get_answer_for_question question %>
 				
-				<% if answer.completed? %>
+				<% if not answer.nil? and answer.completed? %>
 
 					<p>Subió su respuesta el día DD/MM/AAAA</p>
 
 				<% end %>
 
 				<% if answer.nil? or (not answer.nil? and not answer.expired?) %>
-
-				 	<input type="file" />
+					
+					<fieldset>
+				 		<input type="file" class="form-control" />
+					</fieldset>	
+					<br />		
+					<fieldset>
+				 		<button type="submit" class="btn btn-primary">Guardar respuesta</button>
+					</fieldset>
 
 				<% else %>
 					
 					<% if not answer.completed? and answer.expired? %>
 					
-						<label style="color: red"><strong>El tiempo para subir la respuesta expiro</strong></label>
+						<label style="color: red"><strong>El tiempo para subir la respuesta expiró</strong></label>
 
 					<% end %>
 				
