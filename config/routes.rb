@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     
     resources :submissions, only: [:index, :show, :new, :create] do
       resources :answers, only: [:create]
+      post 'download' => 'questions#download', as: 'answer_download'
     end
 
   end

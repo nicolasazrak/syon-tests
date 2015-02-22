@@ -34,6 +34,7 @@ class SubmissionsController < ApplicationController
 
 		flash[:last_token] = @submission.token
 		redirect_to test_submissions_path(@test)
+		
 	end
 
 

@@ -5,20 +5,36 @@ class AnswersController < ApplicationController
 
 	def create
 
-		@question = Question.find(params[:question_id])
 		@submission = Submission.find_by_token(params[:submission_id])
+		@test = @submission.test
 
+		@question = Question.find(params[:question_id])
+
+	
 		@answer = @submission.get_answer_for_question @question
 
 		if @answer.nil?
 			@answer = Answer.new
-			@answer.question = @question
 			@answer.submission = @submission
+			@answer.question = @question
 		end
 
-		@answer.save
+		if not @answer.nil? and not @answer.expired?
+			
+			uploaded_io = params[:attachment]
+			filename = (0...10).map { ('a'..'z').to_a[rand(26)] }.join + '_' + uploaded_io.original_filename.delete(' ')
 
-		send_file File.join(Rails.root, 'public', 'attachments', @question.attachment)
+	  		File.open(Rails.root.join('public', 'attachments', filename), 'wb') do |file|
+	    		file.write(uploaded_io.read)
+	    	end
+
+	    	@answer.attachment = filename
+	    	@answer.save
+
+		end
+
+
+		redirect_to test_submission_path @test, @submission.token
 
 	end
 

@@ -1,5 +1,8 @@
 class QuestionsController < ApplicationController
 
+	skip_before_filter :require_login, :only => [:download]
+
+
 	def new
 		@question = Question.new
 		@test = Test.find(params[:test_id])
@@ -23,6 +26,27 @@ class QuestionsController < ApplicationController
 		@question.test = @test
 		@question.save
 		redirect_to test_submissions_path(@test)
+
+	end
+
+
+	def download
+
+		@question = Question.find(params[:question_id])
+		@submission = Submission.find_by_token(params[:submission_id])
+
+		@answer = @submission.get_answer_for_question @question
+
+		if @answer.nil?
+			@answer = Answer.new
+			@answer.question = @question
+			@answer.submission = @submission
+		end
+
+		@answer.save
+
+		send_file File.join(Rails.root, 'public', 'attachments', @question.attachment)
+
 
 	end
 

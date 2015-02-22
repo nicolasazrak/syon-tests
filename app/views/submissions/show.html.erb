@@ -19,8 +19,11 @@
 			
 			<h4><strong><%= question.title %></strong></h4>
 			
+			<br>
+
 			<p><%= question.description %></p>
 			
+			<p><strong>Duración: </strong><%= question.duration %> minutos</p>
 			<br>
 			
 			<div class="col-md-6 text-center">
@@ -29,10 +32,11 @@
 
 				<br><br>
 
-				<%= form_tag(test_submission_answers_path(question.test, @submission.token), method: "post") do %>
+				<%= form_tag(test_submission_answer_download_path(question.test, @submission.token), method: "post") do %>
 
 					<%= hidden_field_tag 'question_id', question.id %>
 					<button class="btn btn-success" type="submit"><i class="fa fa-download"></i> Descargar</button>
+
 				<% end %>
 
 			</div>
@@ -40,23 +44,42 @@
 
 			<div class="col-md-6 text-center" style="margin-top: 60px;">
 				
-				<% answer = @submission.get_answer_for_question question %>
-				
-				<% if not answer.nil? and answer.completed? %>
+				<% answer = @submission.get_answer_for_question question
+				 if answer.nil? 
+					answer = Answer.new
+				end %>
 
-					<p>Subió su respuesta el día DD/MM/AAAA</p>
+				<% if not answer.expiration_date.nil? and not answer.expired? %>
+					<p>Tiene tiempo para subir su respuesta hasta <%= answer.expiration_date.strftime("%d/%m/%Y %H:%M") %>  </p>
+				<% end %>
+
+				<% if answer.completed?  %>
+
+					<p>Subió su respuesta el día <%= answer.updated_at.strftime("%d/%m/%Y %H:%M") %> 
+						<% if not @user.nil? %>
+							<a href="/attachments/<%= answer.attachment %>" target="_blank">Descargar</a>
+						<% end %>
+					</p>
 
 				<% end %>
 
-				<% if answer.nil? or (not answer.nil? and not answer.expired?) %>
+				<% if not answer.expired? %>
 					
-					<fieldset>
-				 		<input type="file" class="form-control" />
-					</fieldset>	
-					<br />		
-					<fieldset>
-				 		<button type="submit" class="btn btn-primary">Guardar respuesta</button>
-					</fieldset>
+
+					<%= form_tag(test_submission_answers_path(question.test, @submission.token), method: "post", multipart: true) do %>
+						
+						<%= hidden_field_tag 'question_id', question.id %>
+
+						<fieldset>
+					 		<%= file_field_tag :attachment, class: 'form-control' %>
+						</fieldset>	
+						<br />		
+						<fieldset>
+					 		<button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Guardar respuesta</button>
+						</fieldset>
+						
+					<% end %>
+					
 
 				<% else %>
 					
@@ -81,3 +104,6 @@
 
 
 <% end %>
+
+
+<br><br>

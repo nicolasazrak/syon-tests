@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20150216201150) do
   create_table "answers", force: :cascade do |t|
     t.integer  "question_id"
     t.integer  "submission_id"
+    t.string   "attachment"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end

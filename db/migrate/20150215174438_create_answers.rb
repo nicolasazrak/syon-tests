@@ -4,7 +4,8 @@ class CreateAnswers < ActiveRecord::Migration
 
       t.integer :question_id
       t.integer :submission_id
-      
+      t.string  :attachment
+
       t.timestamps null: false
     end
 
