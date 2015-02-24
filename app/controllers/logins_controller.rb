@@ -3,7 +3,6 @@ class LoginsController < ApplicationController
 	skip_before_filter :require_login
 	layout "login"
 
-
 	def index
 
 	end
@@ -14,8 +13,17 @@ class LoginsController < ApplicationController
 	end
 
 	def create
-		cookies[:current_user_id] = 1
-		redirect_to tests_path
+
+		@user = User.authenticate(params[:email], params[:password])
+
+		if not @user.nil?
+			cookies[:current_user_id] = @user.id
+			redirect_to tests_path
+		else
+			flash[:invalid_user] = true
+			redirect_to login_path
+		end
+		
 	end
 
 
