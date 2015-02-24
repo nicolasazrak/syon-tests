@@ -23,7 +23,7 @@ class Answer < ActiveRecord::Base
 	end
 
 	def completed?
-		not defined?(attachment) or attachment.nil?
+		defined?(attachment) and not attachment.nil?
 	end
 
 	def expiration_date
