@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
 	def create
 		
 		@question = Question.new(params.require(:question).permit(:title, :description))
-		@question.duration = params[:question][:duraction].to_i
+		@question.duration = params[:question][:duration].to_i
 		@test = Test.find(params[:test_id])
 
 		uploaded_io = params[:question][:attachment]

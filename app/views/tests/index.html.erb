@@ -1,7 +1,7 @@
 <h1 class="text-center">Listado de Tests</h1>
 
 <br>
-<%= link_to "Nuevo test", new_test_path, class: 'btn btn-success' %>
+<a class="btn btn-success" href="<%= new_test_path %>"><i class="fa fa-plus icon-button"></i> Nuevo test</a>
 <br><br><br>
 
 <table class="table table-hover">
@@ -10,7 +10,6 @@
 			<th>ID</th>
 			<th>Fecha creación</th>
 			<th>Cantidad registrados</th>
-			<th>Cantidad de entregas</th>
 			<th>Descripción</th>
 			<th class="text-center">Acción</th>
 		</tr>
@@ -19,13 +18,12 @@
 		<% @tests.each do |test| %>
 			<tr>
 				<td><%= test.id %></td>
-				<td><%= test.created_at %></td>
-				<td></td>
-				<td></td>
+				<td><%= test.created_at.strftime("%d/%m/%Y %H:%M") %></td>
+				<td><%= test.submissions.count %></td>
 				<td><%= test.description %></td>
 				<td class="text-center">
-					<%= link_to "Ver entregas", [test, :submissions], class: 'btn btn-primary' %>
-					<%= link_to "Editar", edit_test_path(test),       class: 'btn btn-default' %>
+				<a class="btn btn-primary" href="<%= test_submissions_path(test) %>"><i class="fa fa-check  icon-button"></i> Ver entregas</a>
+					<a class="btn btn-default" href="<%= edit_test_path(test) %>"><i class="fa fa-pencil icon-button"></i> Editar</a>
 				</td>
 			</tr>
 		<% end %>

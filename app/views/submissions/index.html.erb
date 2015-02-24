@@ -14,12 +14,11 @@
 <br>
 
 
-<%= link_to "Volver", tests_path, class: 'btn btn-primary' %>
+<a class="btn btn-primary" href="<%= tests_path %>"><i class="fa fa-arrow-left icon-button"></i> Volver</a>
 
-<%= link_to "Crear nueva entrega", new_test_submission_path, class: 'btn btn-success' %>
+<a class="btn btn-success" href="<%= new_test_submission_path %>"><i class="fa fa-plus icon-button"></i> Crear nueva entrega</a>
 
-<%= link_to "Agregar pregunta", new_test_question_path(@test), class: 'btn btn-default' %>
-
+<a class="btn btn-default" href="<%= new_test_question_path(@test) %>"><i class="fa fa-plus icon-button"></i>  Agregar pregunta</a>
 
 
 <br /><br /><br />
@@ -39,7 +38,9 @@
 				<td><%= submission.id %></td>
 				<td><%= submission.applicant.name %></td>
 				<td><%= submission.applicant.email %></td>
-				<td class="text-center"><%= link_to 'Ver', test_submission_path(@test, submission.token), class: 'btn btn-default' %></td>
+				<td class="text-center">
+					<a class='btn btn-default' href="<%= test_submission_path(@test, submission.token) %>"><i class="fa fa-check icon-button"></i> Ver</a>
+				</td>
 			</tr>
 		<% end %>
 	</tbody>
